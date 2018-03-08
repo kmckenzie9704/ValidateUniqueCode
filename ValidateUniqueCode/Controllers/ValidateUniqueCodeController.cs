@@ -16,7 +16,7 @@ namespace ValidateUniqueCode.Controllers
         [HttpGet]
         public string Get()
         {
-            string strUniqueCode = "Validate a Unique Code and return the associated email.s"; // ValidateCode("8A4BB948");
+            string strUniqueCode = "Validate a Unique Code and return the associated email."; // ValidateCode("8A4BB948");
             return strUniqueCode;
         }
 
