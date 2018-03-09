@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using ValidateUniqueCode.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Converters;
+//using Newtonsoft.Json.Serialization;
+//using Newtonsoft.Json.Converters;
 
 
 namespace ValidateUniqueCode.Controllers
