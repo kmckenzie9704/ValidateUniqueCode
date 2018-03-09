@@ -37,8 +37,8 @@ namespace ValidateUniqueCode.Controllers
             using (var context = new DatabaseContext())
             {
                 var code = context.UniqueCodes.FirstOrDefault(c => c.uniCode == strCodeToFind && c.uniAccepted == false);
-                JsonSerializer serializer = new JsonSerializer();
-                var json = JsonConvert.SerializeObject(code);
+                Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
+                var json = Newtonsoft.Json.JsonConvert.SerializeObject(code);
                 strUniqueCode = json;
             }
 
