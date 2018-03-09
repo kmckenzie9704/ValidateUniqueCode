@@ -5,8 +5,6 @@ using System.Threading.Tasks;
 using ValidateUniqueCode.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-//using Newtonsoft.Json.Serialization;
-//using Newtonsoft.Json.Converters;
 
 
 namespace ValidateUniqueCode.Controllers
@@ -37,8 +35,8 @@ namespace ValidateUniqueCode.Controllers
             using (var context = new DatabaseContext())
             {
                 var code = context.UniqueCodes.FirstOrDefault(c => c.uniCode == strCodeToFind && c.uniAccepted == false);
-                Newtonsoft.Json.JsonSerializer serializer = new Newtonsoft.Json.JsonSerializer();
-                var json = Newtonsoft.Json.JsonConvert.SerializeObject(code);
+                JsonSerializer serializer = new JsonSerializer();
+                var json = JsonConvert.SerializeObject(code);
                 strUniqueCode = json;
             }
 
