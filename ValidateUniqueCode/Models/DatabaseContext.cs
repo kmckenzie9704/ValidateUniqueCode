@@ -16,8 +16,8 @@ namespace ValidateUniqueCode.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=tcp:applicants.database.windows.net,1433;Initial Catalog=Applicants;Persist Security Info=False;User ID=kmckenzie;Password=2qaw#WSE;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            //optionsBuilder.UseSqlServer("Server=tcp:applicants.database.windows.net,1433;Initial Catalog=Applicants;Persist Security Info=False;User ID=kenneth.mckenzie@myacuity.com;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=Active Directory Integrated;");
+            //optionsBuilder.UseSqlServer("Server=tcp:applicants.database.windows.net,1433;Initial Catalog=Applicants;Persist Security Info=False;User ID=kmckenzie;Password=2qaw#WSE;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer("Server=tcp:applicants.database.windows.net,1433;Initial Catalog=Applicants;Persist Security Info=False;User ID=kenneth.mckenzie@myacuity.com;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=Active Directory Integrated;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

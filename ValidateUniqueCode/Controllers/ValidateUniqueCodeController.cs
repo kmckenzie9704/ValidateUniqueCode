@@ -16,7 +16,7 @@ namespace ValidateUniqueCode.Controllers
         [HttpGet]
         public string Get()
         {
-            string strUniqueCode = "Deploy as Post-Build worked!  " + ValidateCode("2D0BAC24");  // "Validate a Unique Code and return the associated email."; //
+            string strUniqueCode = "Integrated Authentication!  " + ValidateCode("2D0BAC24");  // "Validate a Unique Code and return the associated email."; //
             return strUniqueCode;
         }
 
