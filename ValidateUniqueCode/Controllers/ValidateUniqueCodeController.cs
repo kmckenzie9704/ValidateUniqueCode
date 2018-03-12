@@ -16,7 +16,7 @@ namespace ValidateUniqueCode.Controllers
         [HttpGet]
         public string Get()
         {
-            string strUniqueCode = "The full pipeline worked!  " + ValidateCode("2D0BAC24");  // "Validate a Unique Code and return the associated email."; //
+            string strUniqueCode = "Chained projects worked!  " + ValidateCode("2D0BAC24");  // "Validate a Unique Code and return the associated email."; //
             return strUniqueCode;
         }
 
