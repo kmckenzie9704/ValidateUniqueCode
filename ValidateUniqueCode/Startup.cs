@@ -37,7 +37,7 @@ namespace ValidateUniqueCode
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            _devConnection = Configuration["ConnectionStrings:DevConnection"];
+            _devConnection = Configuration["DevConnection"];
             //ConfigurationManager.GetConnectionStringValue("DefaultConnection"));
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration["DevConnection"]));
             services.AddMvc();
