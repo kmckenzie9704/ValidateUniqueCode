@@ -34,15 +34,22 @@ namespace ValidateUniqueCode
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
             string strNull = string.Empty;
+            if (env.IsDevelopment())
+            {
+                _devConnection = Configuration["DevConnection"];
+            }
+            else
+            {
+                _devConnection = Configuration.GetConnectionString("DevConnection");
+            }
+
             _env = env.EnvironmentName;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            _devConnection = Configuration["DevConnection"];
-            //ConfigurationManager.GetConnectionStringValue("DefaultConnection"));
-            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration["DevConnection"]));
+            services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(_devConnection));
             services.AddMvc();
 
         }
