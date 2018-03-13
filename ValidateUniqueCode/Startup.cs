@@ -22,19 +22,23 @@ namespace ValidateUniqueCode
 
         public Startup(IHostingEnvironment env)
         {
-            var builder = new ConfigurationBuilder();
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json");
             if (env.IsDevelopment())
             {
                 builder.AddUserSecrets<Startup>();
             }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+            string strNull = string.Empty;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            _devConnection = Configuration["DevConnection"];
+            _devConnection = Configuration["ConnectionStrings:DevConnection"];
+            //ConfigurationManager.GetConnectionStringValue("DefaultConnection"));
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration["DevConnection"]));
             services.AddMvc();
 
@@ -48,11 +52,11 @@ namespace ValidateUniqueCode
             {
                 app.UseDeveloperExceptionPage();
             }
-            //var result = string.IsNullOrEmpty(_devConnection) ? "Null" : "Not Null";
-            //app.Run(async (context) =>
-            //{
-            //    await context.Response.WriteAsync($"Secret is {_devConnection}");
-            //});
+            var result = string.IsNullOrEmpty(_devConnection) ? "Null" : "Not Null";
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync($"Secret is {_devConnection}");
+            });
 
             app.UseMvc();
         }
