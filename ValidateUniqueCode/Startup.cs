@@ -19,6 +19,7 @@ namespace ValidateUniqueCode
     {
         public IConfiguration Configuration { get; }
         string _devConnection = null;
+        string _env = string.Empty;
 
         public Startup(IHostingEnvironment env)
         {
@@ -33,6 +34,7 @@ namespace ValidateUniqueCode
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
             string strNull = string.Empty;
+            _env = env.EnvironmentName;
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -56,7 +58,7 @@ namespace ValidateUniqueCode
             var result = string.IsNullOrEmpty(_devConnection) ? "Null" : "Not Null";
             app.Run(async (context) =>
             {
-                await context.Response.WriteAsync($"Secret is {_devConnection}");
+                await context.Response.WriteAsync($"Secret is {_devConnection}.  Env is {_env}.");
             });
 
             app.UseMvc();
