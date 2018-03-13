@@ -62,11 +62,11 @@ namespace ValidateUniqueCode
             {
                 app.UseDeveloperExceptionPage();
             }
-            var result = string.IsNullOrEmpty(_devConnection) ? "Null" : "Not Null";
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync($"Secret is {_devConnection}.  Env is {_env}.");
-            });
+            //var result = string.IsNullOrEmpty(_devConnection) ? "Null" : "Not Null";
+            //app.Run(async (context) =>
+            //{
+            //    await context.Response.WriteAsync($"Secret is {_devConnection}.  Env is {_env}.");
+            //});
 
             app.UseMvc();
         }
