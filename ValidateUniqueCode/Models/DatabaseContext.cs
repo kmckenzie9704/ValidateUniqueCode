@@ -1,24 +1,21 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace ValidateUniqueCode.Models
 {
     public class DatabaseContext : DbContext
     {
-        public DatabaseContext()
-        { }
+
+        public DatabaseContext()  { }
 
         public DatabaseContext(DbContextOptions<DatabaseContext> options)
-        : base(options)
-            { }
+        : base(options) {
+            string strNull = string.Empty;
+        }
 
         public DbSet<UniqueCode> UniqueCodes { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //optionsBuilder.UseSqlServer("Server=tcp:applicants.database.windows.net,1433;Initial Catalog=Applicants;Persist Security Info=False;User ID=kmckenzie;Password=2qaw#WSE;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            optionsBuilder.UseSqlServer("Server=tcp:applicants.database.windows.net,1433;Initial Catalog=Applicants;Persist Security Info=False;User ID=kenneth.mckenzie@myacuity.com;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Authentication=Active Directory Integrated;");
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

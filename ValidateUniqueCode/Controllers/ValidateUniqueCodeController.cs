@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using ValidateUniqueCode.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Microsoft.Extensions.Configuration;
 
 
 namespace ValidateUniqueCode.Controllers
@@ -12,11 +13,18 @@ namespace ValidateUniqueCode.Controllers
     [Route("api/ValidateUniqueCode")]
     public class ValidateUniqueCodeController : Controller
     {
+
+        private DatabaseContext _context;
+
+        public ValidateUniqueCodeController(DatabaseContext context)
+        {
+            _context = context;
+        }
         // GET api/ValidateUniqueCode
         [HttpGet]
         public string Get()
         {
-            string strUniqueCode = "Integrated Authentication!  " + ValidateCode("2D0BAC24");  // "Validate a Unique Code and return the associated email."; //
+            string strUniqueCode = "Integrated Authentication Works!  " + ValidateCode("2D0BAC24");  // "Validate a Unique Code and return the associated email."; //
             return strUniqueCode;
         }
 
@@ -32,13 +40,11 @@ namespace ValidateUniqueCode.Controllers
         private string ValidateCode(string strCodeToFind)
         {
             string strUniqueCode = string.Empty;
-            using (var context = new DatabaseContext())
-            {
-                var code = context.UniqueCodes.FirstOrDefault(c => c.uniCode == strCodeToFind && c.uniAccepted == false);
-                JsonSerializer serializer = new JsonSerializer();
-                var json = JsonConvert.SerializeObject(code);
-                strUniqueCode = json;
-            }
+
+            var code = _context.UniqueCodes.FirstOrDefault(c => c.uniCode == strCodeToFind && c.uniAccepted == false);
+            JsonSerializer serializer = new JsonSerializer();
+            var json = JsonConvert.SerializeObject(code);
+            strUniqueCode = json;
 
             return strUniqueCode;
         }
