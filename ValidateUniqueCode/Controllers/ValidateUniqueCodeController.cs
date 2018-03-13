@@ -41,11 +41,13 @@ namespace ValidateUniqueCode.Controllers
         {
             string strUniqueCode = string.Empty;
 
-            var code = _context.UniqueCodes.FirstOrDefault(c => c.uniCode == strCodeToFind && c.uniAccepted == false);
-            JsonSerializer serializer = new JsonSerializer();
-            var json = JsonConvert.SerializeObject(code);
-            strUniqueCode = json;
-
+            using (_context)
+            {
+                var code = _context.UniqueCodes.FirstOrDefault(c => c.uniCode == strCodeToFind && c.uniAccepted == false);
+                JsonSerializer serializer = new JsonSerializer();
+                var json = JsonConvert.SerializeObject(code);
+                strUniqueCode = json;
+            }
             return strUniqueCode;
         }
     }

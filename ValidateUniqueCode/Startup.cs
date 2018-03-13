@@ -17,17 +17,18 @@ namespace ValidateUniqueCode
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IHostingEnvironment env)
         {
             var builder = new ConfigurationBuilder();
-            builder.AddUserSecrets<Startup>();
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets<Startup>();
+            }
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
-            
-
         }
-
-        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
