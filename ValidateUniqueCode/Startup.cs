@@ -18,6 +18,7 @@ namespace ValidateUniqueCode
     public class Startup
     {
         public IConfiguration Configuration { get; }
+        string _testSecret = null;
 
         public Startup(IHostingEnvironment env)
         {
@@ -33,6 +34,7 @@ namespace ValidateUniqueCode
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            _testSecret = Configuration["DevConnection"];
             services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(Configuration["DevConnection"]));
             services.AddMvc();
 
@@ -46,6 +48,11 @@ namespace ValidateUniqueCode
             {
                 app.UseDeveloperExceptionPage();
             }
+            var result = string.IsNullOrEmpty(_testSecret) ? "Null" : "Not Null";
+            app.Run(async (context) =>
+            {
+                await context.Response.WriteAsync($"Secret is {_testSecret}");
+            });
 
             app.UseMvc();
         }
